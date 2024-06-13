@@ -48,35 +48,32 @@
     </style>
 </head>
 <body>
-    <h1>Posts</h1>
-    <div id="posts">
-        <!-- Exemplo de posts estáticos -->
-        <div class="post">
-            <div class="post-content">
-                Conteúdo do post 1.
-            </div>
-            <div class="post-info">
-                Autor: Anônimo | Criado em: 2024-06-14 10:00:00
-            </div>
-        </div>
-        <div class="post">
-            <div class="post-content">
-                Conteúdo do post 2.
-            </div>
-            <div class="post-info">
-                Autor: Anônimo | Criado em: 2024-06-15 11:00:00
-            </div>
-        </div>
-        <!-- Adicione mais posts conforme necessário -->
-    </div>
-
-    <!-- Formulário para criar um novo post -->
+   <h1>Novo Post</h1>
     <div class="new-post-form">
-        <h2>Novo Post</h2>
-        <form action="submit_post.php" method="post">
+        <!-- Inclua um campo oculto para armazenar a abreviação da categoria -->
+        <input type="hidden" name="category_abbreviation" id="category-abbreviation" value="">
+        <form action="submit_post.php" method="post" enctype="multipart/form-data">
+            <!-- Outros campos do formulário -->
             <textarea name="content" placeholder="Digite seu post aqui"></textarea>
+            <input type="file" name="image" accept="image/*">
             <input type="submit" value="Postar">
         </form>
     </div>
+    <script>
+        // Script JavaScript para preencher o campo oculto com a abreviação da categoria
+        document.addEventListener('DOMContentLoaded', function() {
+            // Obter todos os links de categoria
+            var categoryLinks = document.querySelectorAll('#categories a');
+            // Adicionar evento de clique a cada link
+            categoryLinks.forEach(function(link) {
+                link.addEventListener('click', function(event) {
+                    // Obter a abreviação da categoria do atributo de dados
+                    var abbreviation = link.getAttribute('data-abbreviation');
+                    // Preencher o campo oculto com a abreviação da categoria
+                    document.getElementById('category-abbreviation').value = abbreviation;
+                });
+            });
+        });
+    </script>
 </body>
 </html>
